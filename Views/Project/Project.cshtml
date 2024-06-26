@@ -1,0 +1,225 @@
+﻿@model ProjectViewModel
+
+<partial name="_Header" />
+
+<div class=" container-fluid " style="max-width:1500px;">
+    <div>
+        <div class=" d-flex justify-content-start mt-5">
+            <h4>Projects</h4>
+
+
+
+        </div>
+
+        <div class="shadow dashboard-card container-fluid mt-4 pb-3 px-3">
+
+            <form id="project-filter-form">
+
+                <div class="row align-items-center">
+
+
+                    <div class="col-lg-3 mt-3">
+
+                        <div class="form-floating">
+                            <select class="form-select" id="patient-state" required name="Technology">
+                                <option selected value="0"> All technology </option>
+                                @foreach (var role in Model.TechnologyRows)
+                                {
+                                    <option value="@role.Id">@role.Name</option>
+                                }
+                            </select>
+                            <label for="patient-state">Search By technology</label>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-3 mt-3">
+
+                        <div class="form-floating">
+                            <select class="form-select" required name="Status">
+                                <option selected value="0"> All status </option>
+                                @foreach (var role in Model.PSDrows)
+                                {
+                                    <option value="@role.StatusId">@role.Name</option>
+                                }
+                            </select>
+                            <label for="patient-state">Search By status</label>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-3 mt-3">
+
+                        <div class="form-floating">
+                            <select class="form-select" required name="Priority">
+                                <option selected value="0"> All priorities </option>
+                                <option value="1">High</option>
+                                <option value="2">Low</option>
+                                <option value="3">Medium</option>
+                            </select>
+                            <label for="patient-state">Search By Priority</label>
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-3 mt-3">
+                        <div class="form-floating">
+                            <input name="Name" type="text" class="form-control" placeholder="Receiver Name" id="" required>
+                            <label for="">Name</label>
+                        </div>
+                    </div>
+
+                    
+                    <div class="col-lg-3 mt-3">
+
+                        <div class="form-floating">
+
+                            <input class="form-control" placeholder="Created Date" type="text" id="floatingTextarea2" name="SortBy">
+                            <label for="floatingTextarea2">SortBy</label>
+
+                        </div>
+
+                    </div>
+                    <div class="col-lg-3 mt-3">
+
+                        <div class="form-floating">
+
+                            <input class="form-control" placeholder="PageNumber" type="number" id="floatingTextarea2" name="PageNumber">
+                            <label for="floatingTextarea2">PageNumber</label>
+
+                        </div>
+
+                    </div>
+                    <div class="col-lg-3 mt-3">
+
+                        <div class="form-floating">
+
+                            <input class="form-control" placeholder="PageSize" type="number" id="floatingTextarea2" name="PageSize">
+                            <label for="floatingTextarea2">PageSize</label>
+
+                        </div>
+
+                    </div>
+
+
+                    @* <div class="col-lg-3 mt-3">
+
+                        <div class="form-floating">
+
+                            <input class="form-control" placeholder="Start Date" type="date" id="floatingTextarea2" name="StartDate">
+                            <label for="floatingTextarea2">Start Date</label>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-3 mt-3">
+
+                        <div class="form-floating">
+
+                            <input class="form-control" placeholder="End Date" type="date" id="floatingTextarea2" name="EndDate">
+                            <label for="floatingTextarea2">End Date</label>
+
+                        </div>
+
+                    </div> *@
+
+                    <div class="col-lg-3 mt-3">
+
+                        <div class="form-floating">
+                            <select class="form-select" required name="Priority">
+                                <option selected value="0"> Is Ascending</option>
+                                <option value="1">true</option>
+                                <option value="2">false</option>
+                            </select>
+                            <label for="patient-state">Search By IsAscending</label>
+                        </div>
+
+                    </div>
+
+
+
+
+                </div>
+                <div class="d-flex justify-content-end">
+                    <div class="col-lg-2 d-flex justify-content-end mt-3">
+
+                        <div class="">
+
+                            <button type="button" class="btn btn-info align-middle" id="project-search-btn">
+                                <span class="text-white">Search</span>
+                            </button>
+
+                        </div>
+                        <div class=" align-middle border-2 rounded-2  btn-info">
+                            <button class="add-p-btn btn btn-outline d-flex justify-content-center m-auto text-light" onclick="addProject()">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="#ffffff" class="bi bi-plus" viewBox="0 0 16 16">
+                                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
+                                </svg>
+                            </button>
+                        </div>
+
+                        <div class="ms-3">
+
+                            <button type="reset" class="btn btn-outline-info align-middle">
+                                <span class="text-info">Clear</span>
+                            </button>
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </form>
+
+            <div id="project-partial-table"></div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+
+    $('#project-search-btn').click(function () {
+
+        var formData = $('#project-filter-form').serialize();
+        console.log(formData);
+
+        $.ajax({
+            url: "/Project/ProjectPartialTable",
+            type: 'POST',
+            data: formData,
+            success: function (result) {
+                $('#project-partial-table').html(result);
+            },
+            complete: function () {
+
+            },
+            error: function (error) {
+                console.log(error);
+                alert('error fetching detail')
+            },
+        });
+
+    });
+
+    $('#project-search-btn').click();
+
+    function addProject() {
+
+        $.ajax({
+            url: "/GenericMaster/AddProjectModal",
+            data: {},
+            type: 'GET',
+            success: function (result) {
+                $('.modal-div').html(result);
+                $('#add-p-modal').modal('show');
+            },
+            error: function (error) {
+                console.log(error);
+                alert('Error adding Project ')
+            },
+        });
+    }
+
+</script>
+

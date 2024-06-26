@@ -1,0 +1,56 @@
+﻿ @model LoginViewModel
+<partial name="_Header" />
+<partial name="Toaster" />
+<div class="row p-0 container-fluid AdminLogin">
+    
+
+    <div class="  col-12 d-flex mt-4 justify-content-center rightcol m-0 p-0">
+        <div class="col-6 mt-4 ">
+           
+            <div class="row p-0 mt-4  justify-content-center">
+                <div class="">
+                    <form method="post">
+
+
+                        
+                        <div class="d-flex justify-content-center mb-4">
+                            <h2 class="h2">Login To Your Account</h2>
+                        </div>
+
+
+                        <div class=" my-4">
+                            <div class="my-3 form-floating d-flex border rounded">
+                                <input asp-for="Email" type="text" class="grey-back form-control no-border" placeholder="Username"
+                                       id="input-box-shadow" />
+                                <label for="floatingInputGroup1">Username</label>
+                            </div>
+                            <div class="form-floating d-flex border rounded">
+                                <input asp-for="Password" type="password" id="pass_input" class="grey-back form-control no-border " placeholder="Password" style="box-shadow:none;" />
+
+                                <label for="floatingPassword">Password</label>
+                            </div>
+                        </div>
+                        <div class="mb-3 ">
+                            <button type="submit" class="col-12 p-2 login_btn btn btn-primary mx-1"
+                                    style="background-color: #01bce9; border-radius: 5px; border:2px solid  #01bce9;">
+                                Login
+                            </button>
+                        </div>
+                        <div class="d-flex justify-content-center">
+                            <a asp-controller="Auth" asp-action="ForgotPassword" class="forgot_link text-info">Forgot Password?</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        @* <partial name="_Footer" /> *@
+
+        @* <div class="justify-content-md-end py-2 justify-content-center d-flex  position-absolute bottom-0 ">
+            <a class="text-decoration-none fw-bold" href=""><span class="text-dark">Terms of Conditions</span></a>
+            <span class="px-2 ">|</span>
+            <a class="text-decoration-none fw-bold" href=""><span class="text-dark">Privacy Policy</span></a>
+        </div>
+ *@
+
+    </div>
+</div>

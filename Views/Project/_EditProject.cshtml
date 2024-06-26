@@ -1,0 +1,96 @@
+﻿@model ProjectViewModel
+<partial name="_Header" />
+<partial name="Toaster" />
+
+<div class="modal fade" id="edit-project-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content ">
+            <div class="modal-header bg-info ">
+                <div class="modal-dark modal-title text-white" id="exampleModalLongTitle">
+                    Project Details
+                </div>
+                <button type="button" class="btn" aria-label="Close" data-bs-dismiss="modal">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px"
+                         fill="#FFFFFF">
+                        <path d="M0 0h24v24H0V0z" fill="none" />
+                        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z" />
+                    </svg>
+                </button>
+            </div>
+            <form method="post" asp-action="EditProject" asp-controller="Project">
+
+                <div class="modal-body ">
+
+                    <fieldset id="project-form-fieldset">
+
+                        <div class="modal-flex my-3">
+
+                            <input id="id" hidden asp-for="ProjectId" />
+                            <div class="row">
+
+                                <div class="col-md-6 mt-4">
+                                    <div class=" form-floating floating-label">
+                                        <input required type="text" class="form-control" pattern="[A-Za-z]{1,32}" placeholder="First Name" asp-for="Name">
+                                        <label for="floatingInput">Name</label>
+                                        <span asp-validation-for="Name" style="color:red"></span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-12 mt-4">
+                                    <select asp-for="TechnoogyId" class=" form-select" style="height:60px;">
+                                        @for (int i = 0; i < Model.TechnologyRows.Count; i++)
+                                        {
+                                            <option value="@Model.TechnologyRows[i].Id">@Model.TechnologyRows[i].Name</option>
+                                        }
+                                    </select>
+
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-12 mt-4">
+                                    <select asp-for="Status" class=" form-select" style="height:60px;">
+                                        @for (int i = 0; i < Model.PSDrows.Count; i++)
+                                        {
+                                            <option value="@Model.PSDrows[i].StatusId">@Model.PSDrows[i].Name</option>
+                                        }
+                                    </select>
+
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-12 mt-4">
+                                    <select asp-for="Priority" class=" form-select" style="height:60px;">
+                                        <option class="form-floating" disabled value="0">Choose priority </option>
+                                        <option value="1">High</option>
+                                        <option value="2">Low</option>
+                                        <option value="3">Medium</option>
+                                    </select>
+
+                                </div>
+                                <div class="col-md-6 mt-4">
+                                    <div class=" form-floating floating-label">
+                                        <input required type="text" class="form-control" pattern="[A-Za-z]{1,32}" placeholder="Description" asp-for="Description">
+                                        <label for="floatingInput">Description</label>
+                                        <span asp-validation-for="Description" style="color:red"></span>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+
+
+
+
+                        </div>
+
+                    </fieldset>
+
+                </div>
+
+                <div class="w-100 d-flex justify-content-evenly my-4 row">
+                    <button type="button" data-bs-dismiss="modal" class="btn btn-outline col-5 bg-dark text-light ">Cancel</button>
+                    <button type="submit" id="edit-project-save-btn" class="btn btn-outline col-5  bg-info">Save</button>
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+</div>

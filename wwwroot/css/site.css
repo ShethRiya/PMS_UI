@@ -1,0 +1,234 @@
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+}
+
+.form-select:focus {
+    border-color: none !important;
+}
+.left-img {
+    max-height: 99px;
+    width: 80px;
+}
+
+.left {
+    height: auto;
+    position: absolute;
+    top: 50px;
+    bottom: 0;
+    height: 900px;
+}
+
+.moon {
+    border: 2px solid #01bce9;
+    border-radius: 3px;
+}
+
+.login-button {
+    background-color: #10bce9;
+    color: white;
+    border-radius: 10px;
+}
+
+
+
+.no-border {
+    border: 0;
+    box-shadow: none;
+    background-color: rgb(241, 241, 241,0.5);
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    border: none;
+}
+
+.border {
+    background-color: rgb(241, 241, 241,0.5);
+}
+
+.margin {
+    margin: auto;
+}
+
+.fp {
+    text-decoration: none;
+    color: #01bce9;
+}
+
+#input-box-shadow:focus {
+    box-shadow: none;
+    background-color: rgb(241, 241, 241,0.5)
+}
+
+
+/*********** login css ***********************/
+
+
+body, html {
+    /*height: 100%;*/
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+@media (min-width: 280px) and (max-width: 360px), (max-height: 653px) {
+    .bg-image {
+        height: 653px;
+        width: 280px;
+        background-repeat: no-repeat;
+    }
+}
+
+@media (min-width: 360px) and (max-width: 900px), (max-height: 640) {
+    .bg-image {
+        height: 360px;
+        width: 640px;
+    }
+}
+
+
+
+.login_btn {
+    width: 100%;
+}
+
+
+.forgot_link {
+    text-decoration: none;
+}
+
+.footer_links {
+    color: black;
+    text-decoration: none;
+}
+
+    .footer_links:hover {
+        color: rgb(39, 107, 255);
+    }
+
+.input_img {
+    background-color: rgb(252, 252, 252);
+}
+
+.footer {
+    position: fixed;
+    margin: 0px;
+    bottom: 0px;
+}
+
+@media (max-width: 991px) {
+    .bg {
+        position: absolute;
+        z-index: -1;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: url("../images/11116016_415.jpg") center center;
+        opacity: .4;
+        background-size: cover;
+    }
+
+    /* .rightcol {
+        position: relative;
+        z-index: 1;
+    } */
+    .hello-doc {
+        width: 300px;
+        height: 170px;
+    }
+}
+
+@media(max-width:445px) {
+    .hello-doc {
+        width: 200px;
+        height: 120px;
+    }
+
+    input, a, label, button {
+        font-size: small;
+    }
+
+    .h2 {
+        font-size: medium;
+        font-weight: 400;
+        font-style: bold;
+    }
+}
+
+@media(max-width:400px) {
+    .hello-doc {
+        width: 150px;
+        height: 100px;
+    }
+}
+
+.btn-container {
+    height: 80vh;
+}
+
+
+
+.dark-mode-logo {
+    height: 30px;
+    width: 30px;
+}
+
+
+.patient-dashboard {
+    background-color: #f9f9f9;
+}
+
+.nav .active {
+    background-color: white !important;
+}
+
+.active .tabHeader {
+    text-decoration: none;
+    font-weight: 500;
+    border-bottom: 2px solid var(--primary);
+}
+
+.tabHeader {
+    color: black;
+    background-color: none;
+}
+
+    .tabHeader:active {
+        color: #01bce9;
+    }
+
+
+.db-row {
+    border: 2px solid red;
+}
+
+.optionBar {
+    width: 30px;
+    height: 30px;
+}
+
+.top-50 {
+    margin: 0;
+    position: absolute;
+    top: 80%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+
+.text-grey {
+    color: dimgrey;
+}

@@ -1,0 +1,103 @@
+﻿@using Microsoft.AspNetCore.Http
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+<div class="adminHeader">
+    <nav class="navbar row  p-0 m-0 ">
+        <div class="col-1  mobile  mt-2">
+            <a class="navbar-toggler shadow-none text-decoration-none" class="btn btn-primary" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+                <span class="navbar-toggler-icon"></span>
+                <svg class="mb-3 navbar-toggler-icon" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24px" height="24px" viewBox="0,0,256,256">
+                    <g fill="#01bce9" fill-rule="nonzero" stroke="none" stroke-width="0" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><g transform="scale(8.53333,8.53333)"><path d="M3,7c-0.36064,-0.0051 -0.69608,0.18438 -0.87789,0.49587c-0.18181,0.3115 -0.18181,0.69676 0,1.00825c0.18181,0.3115 0.51725,0.50097 0.87789,0.49587h24c0.36064,0.0051 0.69608,-0.18438 0.87789,-0.49587c0.18181,-0.3115 0.18181,-0.69676 0,-1.00825c-0.18181,-0.3115 -0.51725,-0.50097 -0.87789,-0.49587zM3,14c-0.36064,-0.0051 -0.69608,0.18438 -0.87789,0.49587c-0.18181,0.3115 -0.18181,0.69676 0,1.00825c0.18181,0.3115 0.51725,0.50097 0.87789,0.49587h24c0.36064,0.0051 0.69608,-0.18438 0.87789,-0.49587c0.18181,-0.3115 0.18181,-0.69676 0,-1.00825c-0.18181,-0.3115 -0.51725,-0.50097 -0.87789,-0.49587zM3,21c-0.36064,-0.0051 -0.69608,0.18438 -0.87789,0.49587c-0.18181,0.3115 -0.18181,0.69676 0,1.00825c0.18181,0.3115 0.51725,0.50097 0.87789,0.49587h24c0.36064,0.0051 0.69608,-0.18438 0.87789,-0.49587c0.18181,-0.3115 0.18181,-0.69676 0,-1.00825c-0.18181,-0.3115 -0.51725,-0.50097 -0.87789,-0.49587z"></path></g></g>
+                </svg>
+            </a>
+        </div>
+
+
+
+
+
+
+
+        <div class="col-md-6 col-lg-6 col-4 m-0 d-flex justify-content-end align-items-center">
+            <div>
+                @if (!string.IsNullOrEmpty(HttpContextAccessor.HttpContext.Session.GetString("UserName")))
+                {
+                    <span class="mx-1 laptop">Welcome <b> @HttpContextAccessor.HttpContext.Session.GetString("UserName")  </b>  <b></b></span>
+
+                    <a asp-controller="Auth" asp-action="Logout" onclick="logout" id="logoutBtn" class="btn btn-outline-info shadow-none night-mode-btn p-1">
+                        <svg class="mobile" fill="#01bce9" height="24px" width="24px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 384.971 384.971" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <g id="Sign_Out"> <path d="M180.455,360.91H24.061V24.061h156.394c6.641,0,12.03-5.39,12.03-12.03s-5.39-12.03-12.03-12.03H12.03 C5.39,0.001,0,5.39,0,12.031V372.94c0,6.641,5.39,12.03,12.03,12.03h168.424c6.641,0,12.03-5.39,12.03-12.03 C192.485,366.299,187.095,360.91,180.455,360.91z"></path> <path d="M381.481,184.088l-83.009-84.2c-4.704-4.752-12.319-4.74-17.011,0c-4.704,4.74-4.704,12.439,0,17.179l62.558,63.46H96.279 c-6.641,0-12.03,5.438-12.03,12.151c0,6.713,5.39,12.151,12.03,12.151h247.74l-62.558,63.46c-4.704,4.752-4.704,12.439,0,17.179 c4.704,4.752,12.319,4.752,17.011,0l82.997-84.2C386.113,196.588,386.161,188.756,381.481,184.088z"></path> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> </g> </g></svg>
+                        <span id="logoutBtn" class="laptop">Logout</span>
+                    </a>
+                }
+                <button onclick="toggleDarkMode()" class="p-1 btn btn-outline-info shadow-none night-mode-btn mx-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24px"
+                         viewBox="0 0 24 24" width="24px" fill="#01bce9">
+                        <rect fill="none" height="24" width="24" />
+                        <path d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+    </nav>
+    <hr class="mb-0" />
+    <div class="admin-header  ">
+
+
+        <div class="offcanvas offcanvas-start  " tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel" style="background-color:#01bce9">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title fw-bold text-light" id="offcanvasExampleLabel">MenuBar</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class=" offcanvas-body  w-100">
+
+                <a class="text-decoration-none nav-item fw-bold  border-0 nav-link fs-4 text-light  " id="employee-tab" data-bs-toggle="dropdown">
+                    Employee
+                </a>
+
+                <ul class="dropdown-menu header-li" aria-labelledby="provider-tab">
+                    @if (string.IsNullOrEmpty(HttpContextAccessor.HttpContext.Session.GetString("UserName")))
+                    {
+                        
+                    <li><a class="dropdown-item text-info" asp-controller="Auth" asp-action="Login">Login</a></li>
+                    }
+                    <li><a class="dropdown-item text-info" asp-controller="Auth" asp-action="Registration">Registraion</a></li>
+                    @* <li><a class="dropdown-item text-info" asp-controller="Auth" asp-action="ProfileView">Profile View</a></li> *@
+                </ul>
+
+                <a class="nav-link fs-4 text-light fw-bold " id="generic-master-tab" data-bs-toggle="dropdown">
+                    Generic Master
+                </a>
+
+                <ul class="dropdown-menu header-li" aria-labelledby="provider-tab">
+                    <li><a class="dropdown-item text-info" asp-controller="GenericMaster" asp-action="Designation">Designation</a></li>
+                    <li><a class="dropdown-item text-info" asp-controller="GenericMaster" asp-action="Department">Department</a></li>
+                    <li><a class="dropdown-item text-info" asp-controller="GenericMaster" asp-action="ProjectTechnology">Project Technology</a></li>
+                    <li><a class="dropdown-item text-info" asp-controller="GenericMaster" asp-action="ProjectStatus">Project Status</a></li>
+                    <li><a class="dropdown-item text-info" asp-controller="GenericMaster" asp-action="ProjectType">Project Type</a></li>
+
+                </ul>
+                <a class="nav-link fs-4 text-light fw-bold" id="project-tab" data-bs-toggle="dropdown">
+                    Project
+                </a>
+
+                <ul class="dropdown-menu header-li" aria-labelledby="provider-tab">
+                    <li><a class="dropdown-item text-info" asp-controller="Project" asp-action="Project">Project</a></li>
+                    @* <li><a class="dropdown-item text-info" asp-controller="Project" asp-action="Tasks">Tasks</a></li>
+                    <li><a class="dropdown-item text-info" asp-controller="Project" asp-action="SMSLogs">SMS logs</a></li>
+                    <li><a class="dropdown-item text-info" asp-controller="Project" asp-action="PatientRecords">Task Log</a></li>
+                    <li><a class="dropdown-item text-info" asp-controller="Project" asp-action="Assign">Assigning Project and tasks</a></li> *@
+                </ul>
+                <span class="text-muted">
+
+
+                </span>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"
+        integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous">
+</script>
+

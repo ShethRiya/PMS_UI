@@ -1,0 +1,196 @@
+﻿@model ProjectViewModel
+
+<div class="col-12 px-2 mt-1 ">
+
+    <div class="accordion mt-4" id="accordionExample">
+
+        @for (int i = 0; i < Model.ProjectRows.Count; i++)
+        {
+            var currentRequest = Model.ProjectRows[i];
+            string accordionId = "accordion" + i.ToString();
+            string collapseId = "collapse" + i.ToString();
+
+
+            <div class="accordion-item bg-transparent py-3">
+
+                <div class="accordion-header py-3 " id="@accordionId">
+
+                    <div class="px-3" data-bs-toggle="collapse"
+                         data-bs-target="#@collapseId" aria-expanded="true" aria-controls="@collapseId">
+
+                        <div class="d-flex justify-content-start">
+                            <div class="fs-5">@currentRequest.Name</div>
+                           
+
+                        </div>
+
+                        <div class="d-flex justify-content-start">
+                            <div class="fs-5">@currentRequest.Description</div>
+                        </div>
+                        <div class="">
+                            <a class="btn btn-outline-info fw-bold mt-0 mb-3 me-2">
+
+                                <span class="mobile">@currentRequest.ProjectManagerName</span>
+                            </a>
+                        </div>
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
+            <div id="@collapseId" class="accordion-collapse py-3 collapse" aria-labelledby="@accordionId"
+                 data-bs-parent="#accordionExample">
+                <div class="">
+
+                    <div class="d-flex align-items-center justify-content-end">
+                        <div class="flex-grow-1" style="background-color: grey; height: 1px;"></div>
+                        <div class="btn btn-outline rounded-pill" style="border-color: #203f9a; color: #203f9a;">
+                            <a class="text-decoration-none edit-p-btn" asp-controller="Project" asp-action="EditProject" asp-route-Id="@Model.ProjectRows[i].ProjectId">Edit Project</a>
+
+                        </div>
+                        <div class="" style="background-color: grey; height: 1px; width: 30px;"></div>
+                    </div>
+
+                    <div class="d-flex flex-column m-0">
+
+
+                        <div class="d-flex mt-3">
+                            <svg class="ms-2" xmlns="http://www.w3.org/2000/svg" height="24" fill="#01bce9" viewBox="0 -960 960 960" width="24"><path d="M200-80q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v560q0 33-23.5 56.5T760-80H200Zm0-80h560v-400H200v400Zm0-480h560v-80H200v80Zm0 0v-80 80Zm280 240q-17 0-28.5-11.5T440-440q0-17 11.5-28.5T480-480q17 0 28.5 11.5T520-440q0 17-11.5 28.5T480-400Zm-160 0q-17 0-28.5-11.5T280-440q0-17 11.5-28.5T320-480q17 0 28.5 11.5T360-440q0 17-11.5 28.5T320-400Zm320 0q-17 0-28.5-11.5T600-440q0-17 11.5-28.5T640-480q17 0 28.5 11.5T680-440q0 17-11.5 28.5T640-400ZM480-240q-17 0-28.5-11.5T440-280q0-17 11.5-28.5T480-320q17 0 28.5 11.5T520-280q0 17-11.5 28.5T480-240Zm-160 0q-17 0-28.5-11.5T280-280q0-17 11.5-28.5T320-320q17 0 28.5 11.5T360-280q0 17-11.5 28.5T320-240Zm320 0q-17 0-28.5-11.5T600-280q0-17 11.5-28.5T640-320q17 0 28.5 11.5T680-280q0 17-11.5 28.5T640-240Z" /></svg>
+
+                            <div class="ms-1">
+                                Start Date : @currentRequest.StartDate
+                            </div>
+                        </div>
+
+                        <div class="d-flex mt-3">
+                            <svg class="ms-2" xmlns="http://www.w3.org/2000/svg" height="24" fill="#01bce9" viewBox="0 -960 960 960" width="24"><path d="M200-80q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v560q0 33-23.5 56.5T760-80H200Zm0-80h560v-400H200v400Zm0-480h560v-80H200v80Zm0 0v-80 80Zm280 240q-17 0-28.5-11.5T440-440q0-17 11.5-28.5T480-480q17 0 28.5 11.5T520-440q0 17-11.5 28.5T480-400Zm-160 0q-17 0-28.5-11.5T280-440q0-17 11.5-28.5T320-480q17 0 28.5 11.5T360-440q0 17-11.5 28.5T320-400Zm320 0q-17 0-28.5-11.5T600-440q0-17 11.5-28.5T640-480q17 0 28.5 11.5T680-440q0 17-11.5 28.5T640-400ZM480-240q-17 0-28.5-11.5T440-280q0-17 11.5-28.5T480-320q17 0 28.5 11.5T520-280q0 17-11.5 28.5T480-240Zm-160 0q-17 0-28.5-11.5T280-280q0-17 11.5-28.5T320-320q17 0 28.5 11.5T360-280q0 17-11.5 28.5T320-240Zm320 0q-17 0-28.5-11.5T600-280q0-17 11.5-28.5T640-320q17 0 28.5 11.5T680-280q0 17-11.5 28.5T640-240Z" /></svg>
+
+                            <div class="ms-1">
+                                End Date : @currentRequest.EndDate
+                            </div>
+                        </div>
+
+
+                        <div class="d-flex mt-3">
+                            <svg class="ms-2" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" fill="#01bce9" width="24"><path d="M798-120q-125 0-247-54.5T329-329Q229-429 174.5-551T120-798q0-18 12-30t30-12h162q14 0 25 9.5t13 22.5l26 140q2 16-1 27t-11 19l-97 98q20 37 47.5 71.5T387-386q31 31 65 57.5t72 48.5l94-94q9-9 23.5-13.5T670-390l138 28q14 4 23 14.5t9 23.5v162q0 18-12 30t-30 12ZM241-600l66-66-17-94h-89q5 41 14 81t26 79Zm358 358q39 17 79.5 27t81.5 13v-88l-94-19-67 67ZM241-600Zm358 358Z" /></svg>
+
+                            <div class="ms-1">
+                                Created By : @currentRequest.CreatedBy;
+                            </div>
+                        </div>
+
+
+                        <div class="d-flex mt-3">
+                            <svg class="ms-2" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" fill="#01bce9" width="24"><path d="M798-120q-125 0-247-54.5T329-329Q229-429 174.5-551T120-798q0-18 12-30t30-12h162q14 0 25 9.5t13 22.5l26 140q2 16-1 27t-11 19l-97 98q20 37 47.5 71.5T387-386q31 31 65 57.5t72 48.5l94-94q9-9 23.5-13.5T670-390l138 28q14 4 23 14.5t9 23.5v162q0 18-12 30t-30 12ZM241-600l66-66-17-94h-89q5 41 14 81t26 79Zm358 358q39 17 79.5 27t81.5 13v-88l-94-19-67 67ZM241-600Zm358 358Z" /></svg>
+
+                            <div class="ms-1">
+                                Category :  @currentRequest.ProjectCategory
+                            </div>
+                        </div>
+
+
+                        <div class="d-flex mt-3">
+                            <svg class="ms-2" xmlns="http://www.w3.org/2000/svg" height="24" fill="#01bce9" viewBox="0 -960 960 960" width="24"><path d="M200-80q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v560q0 33-23.5 56.5T760-80H200Zm0-80h560v-400H200v400Zm0-480h560v-80H200v80Zm0 0v-80 80Zm280 240q-17 0-28.5-11.5T440-440q0-17 11.5-28.5T480-480q17 0 28.5 11.5T520-440q0 17-11.5 28.5T480-400Zm-160 0q-17 0-28.5-11.5T280-440q0-17 11.5-28.5T320-480q17 0 28.5 11.5T360-440q0 17-11.5 28.5T320-400Zm320 0q-17 0-28.5-11.5T600-440q0-17 11.5-28.5T640-480q17 0 28.5 11.5T680-440q0 17-11.5 28.5T640-400ZM480-240q-17 0-28.5-11.5T440-280q0-17 11.5-28.5T480-320q17 0 28.5 11.5T520-280q0 17-11.5 28.5T480-240Zm-160 0q-17 0-28.5-11.5T280-280q0-17 11.5-28.5T320-320q17 0 28.5 11.5T360-280q0 17-11.5 28.5T320-240Zm320 0q-17 0-28.5-11.5T600-280q0-17 11.5-28.5T640-320q17 0 28.5 11.5T680-280q0 17-11.5 28.5T640-240Z" /></svg>
+                            <div class="ms-1">
+                                Project technology :@currentRequest.TechnologyName
+                            </div>
+                        </div>
+
+
+                        <div class="d-flex mt-3">
+                            <svg class="ms-2" xmlns="http://www.w3.org/2000/svg" height="24" fill="#01bce9" viewBox="0 -960 960 960" width="24"><path d="M480-480q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 66-47 113t-113 47ZM160-240v-32q0-34 17.5-62.5T224-378q62-31 126-46.5T480-440q66 0 130 15.5T736-378q29 15 46.5 43.5T800-272v32q0 33-23.5 56.5T720-160H240q-33 0-56.5-23.5T160-240Zm80 0h480v-32q0-11-5.5-20T700-306q-54-27-109-40.5T480-360q-56 0-111 13.5T260-306q-9 5-14.5 14t-5.5 20v32Zm240-320q33 0 56.5-23.5T560-640q0-33-23.5-56.5T480-720q-33 0-56.5 23.5T400-640q0 33 23.5 56.5T480-560Zm0-80Zm0 400Z" /></svg>
+                            <div class="ms-1">
+                                IsActive : @if (currentRequest.IsActive)
+                                {
+                                    <input type="checkbox" checked class="check" onchange="StatusChange(@currentRequest.ProjectId, this)" />
+                                }
+                                else
+                                {
+                                    <input type="checkbox" class="check" onchange="StatusChange(@currentRequest.ProjectId, this)" />
+
+                                }
+                            </div>
+                        </div>
+
+
+
+
+                    </div>
+
+
+
+                </div>
+            </div>
+
+
+
+        }
+    </div>
+
+
+</div>
+<script>
+
+    // $('.edit-p-btn').click(function () {
+    //     console.log("editp");
+
+    //     var sId = $(this).data("statusid");
+    //     console.log(sId);
+
+    //     $.ajax({
+    //         url: "/Project/EditProject",
+    //         data: { Id: sId },
+    //         type: 'GET',
+    //         success: function (result) {
+    //             $('.modal-div').html(result);
+    //             $('#edit-p-modal').modal('show');
+    //         },
+    //         error: function (error) {
+    //             console.log(error);
+    //             alert('Error editing p');
+    //             location.reload();
+    //         },
+    //     });
+    // });
+    // console.log("hey");
+    // $('.delet-p-btn').click(function () {
+    //     console.log("delete");
+
+    //     var sId = $(this).data("statusid");
+    //     console.log(sId);
+
+    //     $.ajax({
+    //         url: "/Project/DeleteProject",
+    //         data: { id: sId },
+    //         type: 'GET',
+    //         success: function (result) {
+    //             location.reload();
+    //         },
+    //         error: function (error) {
+    //             console.log(error);
+    //             alert('Error editing p');
+    //             location.reload();
+    //         },
+    //     });
+    // });
+</script>
+<script>
+    function StatusChange(id, checkbox) {
+        var isChecked = checkbox.checked;
+        $.ajax({
+            url: "/Project/StatusChangeProject",
+            data: { Id: id, Status: isChecked },
+            type: 'POST',
+            success: function (result) {
+                location.reload();
+            },
+            error: function (error) {
+                console.log(error);
+                alert('Error changing project')
+            },
+        });
+    }
+</script>

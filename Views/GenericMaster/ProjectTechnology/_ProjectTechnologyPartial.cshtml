@@ -1,0 +1,152 @@
+﻿@model ProjectTechnologyDashboardViewModel
+<partial name="Toaster" />
+
+<div class="table-responsive mt-3 d-none d-md-block">
+    <table class="table ">
+
+        <thead class="table-head ">
+
+            <tr>
+                <th style="text-align: center;">Name</th>
+                <th style="text-align: center;">Created Date</th>
+                <th style="text-align: center;">Created By</th>
+                <th style="text-align: center;">Modified Date</th>
+                <th style="text-align: center;">Modified By</th>
+                <th style="text-align:center;">IsActive</th>
+                <th style="text-align: center;">Actions</th>
+            </tr>
+
+        </thead>
+
+        <tbody class="" id="dashboard-table-body">
+
+            @foreach (var record in Model.PTDrows)
+            {
+                <tr>
+                    <td style="text-align: center;">@record.Name</td>
+                    @if (record.CreatedDate != null)
+                    {
+
+                        <td style="text-align: center;">@record.CreatedDate.Value.ToString("ddd, dd MMM yyyy")</td>
+                    }
+                    else
+                    {
+                        <td style="text-align: center;">@record.CreatedDate</td>
+
+
+                    }
+                    <td style="text-align: center;">@record.CreatedBy</td>
+                    @if (record.ModifiedDate != null)
+                    {
+                        <td style="text-align: center;">@record.ModifiedDate.Value.ToString("ddd, dd MMM yyyy")</td>
+
+                    }
+                    else
+                    {
+                        <td style="text-align: center;">@record.ModifiedDate</td>
+
+
+                    }
+                    <td style="text-align: center;">@record.ModifiedBy</td>
+                    @if (record.IsActive.Value)
+                    {
+                        <td style="text-align: center;"><input type="checkbox" checked class="check" onchange="StatusChange(@record.Id, this)" /></td>
+                    }
+                    else
+                    {
+
+                        <td style="text-align: center;"><input type="checkbox" class="check" onchange="StatusChange(@record.Id , this)" /></td>
+
+                    }
+
+                    <td class="" style="text-align: center;">
+
+
+                        <button type="button" data-id="@record.Id" class="edit-pt-btn bg-color btn btn-outline btn-info  align-middle">
+                            <span class="text-light">Edit</span>
+                        </button>
+                        <button data-statusid="@record.Id" type="button" class="delet-pt-btn btn btn-outline bg-black  align-middle">
+                            <span class="text-light">Delete</span>
+                        </button>
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+</div>
+<div class="modal-div"></div>
+<nav aria-label="Page navigation example">
+    <ul class="pagination">
+        <li class="page-item"><button type="button" onclick="loadPreviousPage(@Model.CurrentPage)" id="" class="page-link" href="#">Previous</button></li>
+        <li class="page-item"><span class="page-link" href="#">@Model.CurrentPage</span></li>
+
+        <li class="page-item"><button type="button" onclick="loadNextPage(@Model.CurrentPage)" class="page-link" id="">Next</button></li>
+    </ul>
+</nav>
+@* <script src="https://code.jquery.com/jquery-3.7.0.js"></script> *@
+
+<script>
+
+    $('.edit-pt-btn').click(function () {
+        console.log("editpt");
+
+        var sId = $(this).data("id");
+        console.log(sId);
+
+        $.ajax({
+            url: "/GenericMaster/EditProjectTechnology",
+            data: { Id: sId },
+            type: 'GET',
+            success: function (result) {
+                $('.modal-div').html(result);
+                $('#edit-pt-modal').modal('show');
+            },
+            error: function (error) {
+                console.log(error);
+                alert('Error editing pt');
+                location.reload();
+            },
+        });
+    });
+    console.log("hey");
+    $('.delet-pt-btn').click(function () {
+        console.log("delete");
+
+        var sId = $(this).data("statusid");
+        console.log(sId);
+
+        $.ajax({
+            url: "/GenericMaster/DeleteProjectTechnology",
+            data: { id: sId },
+            type: 'GET',
+            success: function (result) {
+                location.reload();
+            },
+            error: function (error) {
+                console.log(error);
+                alert('Error editing pt');
+                location.reload();
+            },
+        });
+    });
+</script>
+<script>
+    function StatusChange(id, checkbox) {
+        var isChecked = checkbox.checked;
+        $.ajax({
+            url: "/GenericMaster/StatusChangePT",
+            data: { Id: id, Status: isChecked },
+            type: 'POST',
+            success: function (result) {
+                location.reload();
+            },
+            error: function (error) {
+                console.log(error);
+                alert('Error changing Status')
+            },
+        });
+    }
+</script>
+

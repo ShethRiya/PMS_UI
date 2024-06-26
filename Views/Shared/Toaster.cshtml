@@ -1,0 +1,21 @@
+﻿<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<script src="~/js/bootstrap.bundle.min.js"></script>
+
+@if (TempData["success"] != null)
+{
+    @* <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="~/js/bootstrap.bundle.min.js" ></script> *@
+    <script type="text/javascript">
+        toastr.success('@TempData["success"]');
+    </script>
+}
+@if (TempData["failure"] != null)
+{
+    <script type="text/javascript">
+
+        toastr.error('@TempData["failure"]');
+
+    </script>
+}
+
+

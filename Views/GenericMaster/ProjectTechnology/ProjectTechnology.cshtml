@@ -1,0 +1,89 @@
+﻿@model ProjectTechnologyDashboardViewModel
+
+<partial name="_Header" />
+<partial name="Toaster" />
+
+<div class="container-fluid mt-4" style="max-width:1800px">
+    <div class="d=flex mt-4 justify-content-between row">
+        <div class="col-11 p-1">
+
+            <div class="form-control  d-flex normal-input  rounded  ">
+                <svg class="mt-2" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 50 50">
+                    <path d="M 21 3 C 11.654545 3 4 10.654545 4 20 C 4 29.345455 11.654545 37 21 37 C 24.701287 37 28.127393 35.786719 30.927734 33.755859 L 44.085938 46.914062 L 46.914062 44.085938 L 33.875 31.046875 C 36.43682 28.068316 38 24.210207 38 20 C 38 10.654545 30.345455 3 21 3 z M 21 5 C 29.254545 5 36 11.745455 36 20 C 36 28.254545 29.254545 35 21 35 C 12.745455 35 6 28.254545 6 20 C 6 11.745455 12.745455 5 21 5 z">
+                    </path>
+                </svg>
+                <input type="text" class="form-control text-decoration-none border-0 grey-back" id="gfg" placeholder="Search project technology">
+            </div>
+        </div>
+        <div class=" col-1 border-2 rounded-2  btn-info">
+            <button class="add-ps-btn btn btn-outline d-flex justify-content-center m-auto text-light" onclick="addPT()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="#ffffff" class="bi bi-plus" viewBox="0 0 16 16">
+                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
+                </svg>
+            </button>
+        </div>
+    </div>
+    <div id="pt-partial-table"></div>
+</div>
+<div class="modal-div"></div>
+<script>
+    var searchTimer;
+    var search_filter;
+    $("#gfg").on("keyup", function () {
+        var searchValue = $(this).val().toLowerCase();
+        search_filter = searchValue;
+
+        clearTimeout(searchTimer);
+        searchTimer = setTimeout(function () {
+            loadPage(1);
+        }, 1000);
+
+    });
+    loadPage(1);
+    function loadNextPage(currentpage) {
+        loadPage(currentpage + 1);
+    }
+
+    function loadPreviousPage(currentpage) {
+        loadPage(currentpage - 1);
+    }
+
+    function applyFilters() {
+        loadPage(1);
+    }
+
+    function loadPage(pageNo) {
+
+        $.ajax({
+            url: "/GenericMaster/ProjectTechnologyPartial",
+            type: 'POST',
+            data: { page: pageNo, searchFilter: search_filter },
+            success: function (result) {
+                $('#pt-partial-table').html(result);
+            },
+            error: function (error) {
+                console.log(error);
+                alert('error fetching details')
+            },
+        });
+    }
+</script>
+<script>
+
+    function addPT() {
+
+        $.ajax({
+            url: "/GenericMaster/AddPTModal",
+            data: {},
+            type: 'GET',
+            success: function (result) {
+                $('.modal-div').html(result);
+                $('#add-pt-modal').modal('show');
+            },
+            error: function (error) {
+                console.log(error);
+                alert('Error adding Project technology')
+            },
+        });
+    }
+</script>

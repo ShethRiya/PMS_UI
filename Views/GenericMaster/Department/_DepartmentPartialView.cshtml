@@ -1,0 +1,154 @@
+﻿@model DepartmentDashboardViewModel
+
+<div class="table-responsive mt-3 ">
+    <table class="table ">
+
+        <thead class="table-head ">
+
+            <tr>
+                <th style="text-align: center;">Name</th>
+                <th style="text-align: center;">Created Date</th>
+                <th style="text-align: center;">Created By</th>
+                <th style="text-align: center;">Modified Date</th>
+                @* <th style="text-align: center;">Modified By</th> *@
+                <th style="text-align:center;">IsActive</th>
+                <th style="text-align: center;">Actions</th>
+            </tr>
+
+        </thead>
+
+        <tbody class="" id="dashboard-table-body">
+
+            @foreach (var record in Model.DPRows)
+            {
+                <tr>
+                    <td style="text-align: center;">@record.Name</td>
+                    @if (record.CreatedDate != null)
+                    {
+
+                        <td style="text-align: center;">@record.CreatedDate.Value.ToString("ddd, dd MMM yyyy")</td>
+                    }
+                    else
+                    {
+                        <td style="text-align: center;">@record.CreatedDate</td>
+
+
+                    }
+                    <td style="text-align: center;">@record.CreatedBy</td>
+                    @if (record.ModifiedDate != null)
+                    {
+                        <td style="text-align: center;">@record.ModifiedDate.Value.ToString("ddd, dd MMM yyyy")</td>
+
+                    }
+                    else
+                    {
+                        <td style="text-align: center;">@record.ModifiedDate</td>
+
+
+                    }
+                   @*  <td style="text-align: center;">@record.CreatedBy</td>
+                    <td style="text-align: center;">@record.ModifiedBy</td> *@
+                    @if (record.IsActive=="true")
+                    {
+                        <td style="text-align: center;"><input type="checkbox" checked class="check" onchange="StatusChange(@record.DepartmentId, this)" /></td>
+                    }
+                    else
+                    {
+
+                        <td style="text-align: center;"><input type="checkbox" class="check" onchange="StatusChange(@record.DepartmentId , this)" /></td>
+
+                    }
+                    @* <td style="text-align: center;">@record.IsActive</td> *@
+
+                    <td class="" style="text-align: center;">
+
+
+                        <button type="button" data-statusid="@record.DepartmentId" class="edit-dp-btn bg-color btn btn-outline btn-info  align-middle">
+                            <span class="text-light">Edit</span>
+                        </button>
+                        <button data-statusid="@record.DepartmentId" type="button" class="delet-dp-btn btn btn-outline bg-black  align-middle">
+                            <span class="text-light">Delete</span>
+                        </button>
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+</div>
+<div class="modal-div"></div>
+<nav aria-label="Page navigation example">
+    <ul class="pagination">
+        <li class="page-item"><button type="button" onclick="loadPreviousPage(@Model.CurrentPage)" id="" class="page-link" href="#">Previous</button></li>
+        <li class="page-item"><span class="page-link" href="#">@Model.CurrentPage</span></li>
+
+        <li class="page-item"><button type="button" onclick="loadNextPage(@Model.CurrentPage)" class="page-link" id="">Next</button></li>
+    </ul>
+</nav>
+@* <script src="https://code.jquery.com/jquery-3.7.0.js"></script> *@
+
+<script>
+
+    $('.edit-dp-btn').click(function () {
+        console.log("editdp");
+
+        var sId = $(this).data("statusid");
+        console.log(sId);
+
+        $.ajax({
+            url: "/GenericMaster/EditDepartmentViewModel",
+            data: { Id: sId },
+            type: 'GET',
+            success: function (result) {
+                console.log("editdp");
+
+                $('.modal-div').html(result);
+                $('#edit-dp-modal').modal('show');
+            },
+            error: function (error) {
+                console.log(error);
+                alert('Error editing dp');
+                location.reload();
+            },
+        });
+    });
+    console.log("hey");
+    $('.delet-dp-btn').click(function () {
+        console.log("delete");
+
+        var sId = $(this).data("statusid");
+        console.log(sId);
+
+        $.ajax({
+            url: "/GenericMaster/DeleteDepartment",
+            data: { id: sId },
+            type: 'GET',
+            success: function (result) {
+                location.reload();
+            },
+            error: function (error) {
+                console.log(error);
+                alert('Error editing dp');
+                location.reload();
+            },
+        });
+    });
+</script>
+<script>
+    function StatusChange(id, checkbox) {
+        var isChecked = checkbox.checked;
+        $.ajax({
+            url: "/GenericMaster/StatusChangeDepartment",
+            data: { Id: id, Status: isChecked },
+            type: 'POST',
+            success: function (result) {
+                location.reload();
+            },
+            error: function (error) {
+                console.log(error);
+                alert('Error changing department ..')
+            },
+        });
+    }
+</script>
