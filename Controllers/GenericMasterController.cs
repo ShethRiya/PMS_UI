@@ -86,10 +86,11 @@ namespace ProjectManagement_UI.Controllers
 
         public async Task<List<PSDrow>> GetPSRequestsAsync(string searchFilter, int pageNumber)
         {
+            string token = HttpContext.Session.GetString(SD.SessionToken);
             PaginationDTO paginationDTO = new PaginationDTO();
             paginationDTO.Name = searchFilter;
             paginationDTO.PageNumber = pageNumber;
-            var response = await _projectStatusService.GetAllAsync<APIResponse>(paginationDTO);
+            var response = await _projectStatusService.GetAllAsync<APIResponse>(paginationDTO,token);
             List<PSDrow> list = new List<PSDrow>();
             if (response != null && response.IsSuccess)
             {
@@ -113,8 +114,9 @@ namespace ProjectManagement_UI.Controllers
 
             if (ModelState.IsValid)
             {
+                string token = HttpContext.Session.GetString(SD.SessionToken);
 
-                var result = await _projectStatusService.CreateAsync<APIResponse>(model);
+                var result = await _projectStatusService.CreateAsync<APIResponse>(model,token);
                 if (result.IsSuccess)
                 {
 
@@ -130,8 +132,9 @@ namespace ProjectManagement_UI.Controllers
         //Getting single project status information
         public async Task<IActionResult> EditProjectStatus(int StudentId)
         {
+            string token = HttpContext.Session.GetString(SD.SessionToken);
 
-            var ps = await _projectStatusService.GetAsync<APIResponse>(StudentId);
+            var ps = await _projectStatusService.GetAsync<APIResponse>(StudentId, token);
 
             if (ps == null)
             {
@@ -150,9 +153,11 @@ namespace ProjectManagement_UI.Controllers
 
             if (ModelState.IsValid)
             {
+                string token = HttpContext.Session.GetString(SD.SessionToken);
+
                 AddEditPSViewModel addEditPSViewModel = new AddEditPSViewModel();
                 addEditPSViewModel.Name = model.Name;
-                var result = await _projectStatusService.UpdateAsync<APIResponse>(addEditPSViewModel, model.StatusId);
+                var result = await _projectStatusService.UpdateAsync<APIResponse>(addEditPSViewModel, model.StatusId,token);
                 if (result.IsSuccess)
                 {
 
@@ -167,7 +172,9 @@ namespace ProjectManagement_UI.Controllers
         //Deleting project status 
         public async Task<IActionResult> DeleteProjectStatus(int id)
         {
-            var result = await _projectStatusService.DeleteAsync<APIResponse>(id);
+            string token = HttpContext.Session.GetString(SD.SessionToken);
+
+            var result = await _projectStatusService.DeleteAsync<APIResponse>(id,token);
             if (result.IsSuccess)
             {
                 TempData["success"] = "Sucessfully added students details";
@@ -182,8 +189,9 @@ namespace ProjectManagement_UI.Controllers
         {
             if (Id != 0 && Status != null)
             {
+                string token = HttpContext.Session.GetString(SD.SessionToken);
 
-                var result = await _projectStatusService.StatusChange<APIResponse>(Id, Status);
+                var result = await _projectStatusService.StatusChange<APIResponse>(Id, Status,token);
                 if (result.IsSuccess)
                 {
                     TempData["success"] = "Sucessfully added students details";
@@ -239,10 +247,12 @@ namespace ProjectManagement_UI.Controllers
 
         public async Task<List<PTDrow>> GetPTRequestsAsync(string searchFilter, int pageNumber)
         {
+            string token = HttpContext.Session.GetString(SD.SessionToken);
+
             PaginationDTO paginationDTO = new PaginationDTO();
             paginationDTO.Name = searchFilter;
             paginationDTO.PageNumber = pageNumber;
-            var response = await _projectTechnologyService.GetAllAsync<APIResponse>(paginationDTO);
+            var response = await _projectTechnologyService.GetAllAsync<APIResponse>(paginationDTO,token);
             List<PTDrow> list = new List<PTDrow>();
             if (response != null && response.IsSuccess)
             {
@@ -266,8 +276,9 @@ namespace ProjectManagement_UI.Controllers
 
             if (ModelState.IsValid)
             {
+                string token = HttpContext.Session.GetString(SD.SessionToken);
 
-                var result = await _projectTechnologyService.CreateAsync<APIResponse>(model);
+                var result = await _projectTechnologyService.CreateAsync<APIResponse>(model,token);
                 if (result.IsSuccess)
                 {
 
@@ -284,8 +295,9 @@ namespace ProjectManagement_UI.Controllers
         {
             if (Id != 0 && Status != null)
             {
+                string token = HttpContext.Session.GetString(SD.SessionToken);
 
-                var result = await _projectTechnologyService.StatusChange<APIResponse>(Id, Status);
+                var result = await _projectTechnologyService.StatusChange<APIResponse>(Id, Status,token);
                 if (result.IsSuccess)
                 {
                     TempData["success"] = "Sucessfully added students details";
@@ -307,12 +319,14 @@ namespace ProjectManagement_UI.Controllers
         [HttpGet]
         public async Task<IActionResult> EditProjectTechnology(int Id)
         {
+            string token = HttpContext.Session.GetString(SD.SessionToken);
+
             if (Id == 0)
             {
                 TempData["failure"] = "Project technology not found";
                 return View("ProjectTechnology/_EditProjectTechnology");
             }
-            var pt = await _projectTechnologyService.GetAsync<APIResponse>(Id);
+            var pt = await _projectTechnologyService.GetAsync<APIResponse>(Id,token);
 
 
             if (pt == null)
@@ -333,9 +347,11 @@ namespace ProjectManagement_UI.Controllers
 
             if (ModelState.IsValid)
             {
+                string token = HttpContext.Session.GetString(SD.SessionToken);
+
                 AddEditPTViewModel addEditPSViewModel = new AddEditPTViewModel();
                 addEditPSViewModel.Name = model.Name;
-                var result = await _projectTechnologyService.UpdateAsync<APIResponse>(addEditPSViewModel, model.Id);
+                var result = await _projectTechnologyService.UpdateAsync<APIResponse>(addEditPSViewModel, model.Id,token);
                 if (result.IsSuccess)
                 {
 
@@ -352,8 +368,9 @@ namespace ProjectManagement_UI.Controllers
         {
             if (id != 0)
             {
+                string token = HttpContext.Session.GetString(SD.SessionToken);
 
-                var result = await _projectTechnologyService.DeleteAsync<APIResponse>(id);
+                var result = await _projectTechnologyService.DeleteAsync<APIResponse>(id, token);
                 if (result.IsSuccess)
                 {
                     TempData["success"] = "Sucessfully deleted project technology details";
@@ -402,10 +419,12 @@ namespace ProjectManagement_UI.Controllers
 
         public async Task<List<PTYDrows>> GetPTYRequestsAsync(string searchFilter, int pageNumber)
         {
+            string token = HttpContext.Session.GetString(SD.SessionToken);
+
             PaginationDTO paginationDTO = new PaginationDTO();
             paginationDTO.Name = searchFilter;
             paginationDTO.PageNumber = pageNumber;
-            var response = await _projectTypeService.GetAllAsync<APIResponse>(paginationDTO);
+            var response = await _projectTypeService.GetAllAsync<APIResponse>(paginationDTO,token);
             List<PTYDrows> list = new List<PTYDrows>();
             if (response != null && response.IsSuccess)
             {
@@ -428,8 +447,9 @@ namespace ProjectManagement_UI.Controllers
         {
             if (ModelState.IsValid)
             {
+                string token = HttpContext.Session.GetString(SD.SessionToken);
 
-                var result = await _projectTypeService.CreateAsync<APIResponse>(model);
+                var result = await _projectTypeService.CreateAsync<APIResponse>(model,token);
                 if (result.IsSuccess)
                 {
 
@@ -446,8 +466,9 @@ namespace ProjectManagement_UI.Controllers
         {
             if (Id != 0 && Status != null)
             {
+                string token = HttpContext.Session.GetString(SD.SessionToken);
 
-                var result = await _projectTypeService.StatusChange<APIResponse>(Id, Status);
+                var result = await _projectTypeService.StatusChange<APIResponse>(Id, Status,token);
                 if (result.IsSuccess)
                 {
                     TempData["success"] = "Sucessfully added project type details";
@@ -474,7 +495,9 @@ namespace ProjectManagement_UI.Controllers
                 TempData["failure"] = "Project type not found";
                 return View("ProjectType/_EditProjectType");
             }
-            var pt = await _projectTypeService.GetAsync<APIResponse>(Id);
+            string token = HttpContext.Session.GetString(SD.SessionToken);
+
+            var pt = await _projectTypeService.GetAsync<APIResponse>(Id,token);
 
 
             if (pt == null)
@@ -496,9 +519,11 @@ namespace ProjectManagement_UI.Controllers
 
             if (ModelState.IsValid)
             {
+                string token = HttpContext.Session.GetString(SD.SessionToken);
+
                 AddEditPTYViewModel addEditPSViewModel = new AddEditPTYViewModel();
                 addEditPSViewModel.Name = model.Name;
-                var result = await _projectTypeService.UpdateAsync<APIResponse>(addEditPSViewModel, model.ProjectCategoryId);
+                var result = await _projectTypeService.UpdateAsync<APIResponse>(addEditPSViewModel, model.ProjectCategoryId,token);
                 if (result.IsSuccess)
                 {
 
@@ -515,8 +540,9 @@ namespace ProjectManagement_UI.Controllers
         {
             if (id != 0)
             {
+                string token = HttpContext.Session.GetString(SD.SessionToken);
 
-                var result = await _projectTypeService.DeleteAsync<APIResponse>(id);
+                var result = await _projectTypeService.DeleteAsync<APIResponse>(id,token);
                 if (result.IsSuccess)
                 {
                     TempData["success"] = "Sucessfully deleted project type details";

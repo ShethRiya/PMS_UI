@@ -1,29 +1,29 @@
-﻿using ProjectManagement_UI.Models.Designation;
+﻿using ProjectManagement_UI.Models.Project;
 using ProjectManagement_UI.Models;
 using ProjectManagement_UI.Services.IServices;
-using ProjectManagement_UI.Models.Project;
+using ProjectManagement_UI.Models.Project.Task;
 
 namespace ProjectManagement_UI.Services.ProjectServices
 {
-    public class ProjectService: BaseService , IProjectService
+    public class TaskService : BaseService, ITaskService
     {
         private readonly IHttpClientFactory _clientFactory;
         private string pmsUrl;
 
-        public ProjectService(IHttpClientFactory clientFactory, IConfiguration configuration) : base(clientFactory)
+        public TaskService(IHttpClientFactory clientFactory, IConfiguration configuration) : base(clientFactory)
         {
             _clientFactory = clientFactory;
             pmsUrl = configuration.GetValue<string>("ServiceUrls:PMSAPIProject");
 
         }
 
-        public Task<T> CreateAsync<T>(CreateProjectViewModel dto, string token)
+        public Task<T> CreateAsync<T>(CreateUpdateTask dto, string token)
         {
             return SendAsync<T>(new APIRequest()
             {
                 ApiType = SD.ApiType.POST,
                 Data = dto,
-                Url = pmsUrl + "/api/project",
+                Url = pmsUrl + "/api/task",
                 Token = token
             });
         }
@@ -38,12 +38,12 @@ namespace ProjectManagement_UI.Services.ProjectServices
         //    });
         //}
 
-        public Task<T> GetAllAsync<T>(ProjectFilter paginationDTO, string token)
+        public Task<T> GetAllAsync<T>(TaskFilter paginationDTO, string token)
         {
             return SendAsync<T>(new APIRequest()
             {
                 ApiType = SD.ApiType.POST,
-                Url = pmsUrl + "/api/project/search",
+                Url = pmsUrl + "/api/task/search",
                 Data = paginationDTO,
                 Token = token
             });
@@ -54,32 +54,31 @@ namespace ProjectManagement_UI.Services.ProjectServices
             return SendAsync<T>(new APIRequest()
             {
                 ApiType = SD.ApiType.GET,
-                Url = pmsUrl + "/api/project/" + id,
+                Url = pmsUrl + "/api/task/" + id,
                 Token = token
             });
         }
 
-        public Task<T> UpdateAsync<T>(ProjectRow dto, int Id, string token)
+        public Task<T> UpdateAsync<T>(int Id, CreateUpdateTask dto, string token)
         {
             return SendAsync<T>(new APIRequest()
             {
                 ApiType = SD.ApiType.PUT,
                 Data = dto,
-                Url = pmsUrl + "/api/project/" + Id,
+                Url = pmsUrl + "/api/task/" + Id,
                 Token = token
             });
         }
-        public Task<T> StatusChange<T>(int id, bool IsActive , string token)
+        public Task<T> StatusChange<T>(int id, bool IsActive, string token)
         {
             return SendAsync<T>(new APIRequest()
             {
                 ApiType = SD.ApiType.POST,
                 //Data = dto,
-                Url = pmsUrl + "/api/project/" + id + "/" + IsActive,
+                Url = pmsUrl + "/api/task/" + id + "/" + IsActive,
                 Token = token
             });
 
         }
-
     }
 }

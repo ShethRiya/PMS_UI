@@ -150,11 +150,11 @@
 
                         </div>
                         <div class=" align-middle border-2 rounded-2  btn-info">
-                            <button class="add-p-btn btn btn-outline d-flex justify-content-center m-auto text-light" onclick="addProject()">
+                            <a asp-controller="Project" asp-action="AddProject" class="add-p-btn btn btn-outline d-flex justify-content-center m-auto text-light" onclick="addProject()">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="#ffffff" class="bi bi-plus" viewBox="0 0 16 16">
                                     <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
                                 </svg>
-                            </button>
+                            </a>
                         </div>
 
                         <div class="ms-3">
@@ -204,22 +204,22 @@
 
     $('#project-search-btn').click();
 
-    function addProject() {
+    // function addProject() {
 
-        $.ajax({
-            url: "/GenericMaster/AddProjectModal",
-            data: {},
-            type: 'GET',
-            success: function (result) {
-                $('.modal-div').html(result);
-                $('#add-p-modal').modal('show');
-            },
-            error: function (error) {
-                console.log(error);
-                alert('Error adding Project ')
-            },
-        });
-    }
+    //     $.ajax({
+    //         url: "/Project/AddProject",
+    //         data: {},
+    //         type: 'GET',
+    //         success: function (result) {
+    //             $('.modal-div').html(result);
+    //             $('#add-project-modal').modal('show');
+    //         },
+    //         error: function (error) {
+    //             console.log(error);
+    //             alert('Error adding Project ')
+    //         },
+    //     });
+    // }
 
 </script>
 

@@ -17,20 +17,29 @@
 
                     <div class="px-3" data-bs-toggle="collapse"
                          data-bs-target="#@collapseId" aria-expanded="true" aria-controls="@collapseId">
-
-                        <div class="d-flex justify-content-start">
-                            <div class="fs-5">@currentRequest.Name</div>
-                           
-
+                        <div classs="d-flex justify-content-between">
+                            <div class="d-flex justify-content-start">
+                                <div class="fs-5">@currentRequest.Name</div>
+                            </div>
+                            <div class="d-flex justify-content-end">
+                                <div class="fs-5">@currentRequest.Description</div>
+                            </div>
                         </div>
-
-                        <div class="d-flex justify-content-start">
-                            <div class="fs-5">@currentRequest.Description</div>
-                        </div>
-                        <div class="">
-                            <a class="btn btn-outline-info fw-bold mt-0 mb-3 me-2">
-
+                        <div class="d-flex justify-content-between">
+                            <a class=" fw-bold mt-0 mb-3 me-2">
                                 <span class="mobile">@currentRequest.ProjectManagerName</span>
+                            </a>
+                            <div class="">
+                                <a asp-controller="Project" asp-action="AddTaskGet" asp-route-Id="@currentRequest.ProjectId" class="btn bg-black fw-bold mt-0 mb-3 me-2">
+
+                                    <span class="text-light">Add Task</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div>
+                            <a asp-controller="Project" asp-action="ViewProjectTasks" asp-route-ProjectId="@currentRequest.ProjectId" class="btn bg-black fw-bold mt-0 mb-3 me-2">
+
+                                <span class="text-light">View all project Task</span>
                             </a>
                         </div>
                     </div>
@@ -48,7 +57,7 @@
                     <div class="d-flex align-items-center justify-content-end">
                         <div class="flex-grow-1" style="background-color: grey; height: 1px;"></div>
                         <div class="btn btn-outline rounded-pill" style="border-color: #203f9a; color: #203f9a;">
-                            <a class="text-decoration-none edit-p-btn" asp-controller="Project" asp-action="EditProject" asp-route-Id="@Model.ProjectRows[i].ProjectId">Edit Project</a>
+                            <a class="text-decoration-none edit-project-btn" asp-controller="Project" asp-action="EditProject" asp-route-Id="@Model.ProjectRows[i].ProjectId">Edit Project</a>
 
                         </div>
                         <div class="" style="background-color: grey; height: 1px; width: 30px;"></div>

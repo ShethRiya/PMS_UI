@@ -115,3 +115,4 @@ C:\Users\pct212\Desktop\PMS_UI\ProjectManagement_UI\bin\Debug\net8.0\Microsoft.I
 C:\Users\pct212\Desktop\PMS_UI\ProjectManagement_UI\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 C:\Users\pct212\Desktop\PMS_UI\ProjectManagement_UI\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
 C:\Users\pct212\Desktop\PMS_UI\ProjectManagement_UI\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\pct212\Desktop\PMS_UI\ProjectManagement_UI\obj\Debug\net8.0\ProjectManagement_UI.sourcelink.json

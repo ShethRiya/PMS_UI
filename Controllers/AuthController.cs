@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -61,8 +62,10 @@ namespace ProjectManagement_UI.Controllers
                 _httpContextAccessor.HttpContext.Session.SetString("UserName", jwt.Claims.FirstOrDefault(u => u.Type == "userName").Value);
                 _httpContextAccessor.HttpContext.Session.SetString("RoleId", jwt.Claims.FirstOrDefault(u => u.Type == "roleId").Value);
                 _httpContextAccessor.HttpContext.Session.SetString(SD.SessionToken, jwttoken.ToString());
+                _httpContextAccessor.HttpContext.Session.SetString("userId", jwt.Claims.FirstOrDefault(u => u.Type == "userId").Value);
 
                 var sd = _httpContextAccessor.HttpContext.Session.GetString(SD.SessionToken);
+
 
                 TempData["success"] = "Succesfully Logged In.";
                 return RedirectToAction("Index", "Home");

@@ -1,51 +1,50 @@
-﻿using ProjectManagement_UI.Models.ProjectStatus;
+﻿using ProjectManagement_UI.Models.Auth;
 using ProjectManagement_UI.Models;
 using ProjectManagement_UI.Services.IServices;
-using ProjectManagement_UI.Models.ProjectType;
+using ProjectManagement_UI.Models.ProjectStatus;
 
-namespace ProjectManagement_UI.Services.GenericMasterServices
+namespace ProjectManagement_UI.Services.AuthServices
 {
-    public class ProjectTypeService : BaseService , IProjectTypeService
+    public class EmployeeService : BaseService , IEmployeeService
     {
         private readonly IHttpClientFactory _clientFactory;
         private string pmsUrl;
 
-        public ProjectTypeService(IHttpClientFactory clientFactory, IConfiguration configuration) : base(clientFactory)
+        public EmployeeService(IHttpClientFactory clientFactory, IConfiguration configuration) : base(clientFactory)
         {
             _clientFactory = clientFactory;
-            pmsUrl = configuration.GetValue<string>("ServiceUrls:PMSAPIProject");
+            pmsUrl = configuration.GetValue<string>("ServiceUrls:PMSAPIEmployee");
 
         }
-
-        public Task<T> CreateAsync<T>(AddEditPTYViewModel dto, string token)
+        public Task<T> CreateAsync<T>(CreateUpdateUserRequestDTO dto, string token)
         {
             return SendAsync<T>(new APIRequest()
             {
                 ApiType = SD.ApiType.POST,
                 Data = dto,
-                Url = pmsUrl + "/api/project-types",
+                Url = pmsUrl + "/api/employee",
                 Token = token
             });
         }
 
-        public Task<T> DeleteAsync<T>(int id, string token)
+        public Task<T> DeleteAsync<T>(Guid id, string token)
         {
             return SendAsync<T>(new APIRequest()
             {
                 ApiType = SD.ApiType.DELETE,
-                Url = pmsUrl + "/api/project-types/" + id,
+                Url = pmsUrl + "/api/project-statuses/" + id,
                 Token = token
             });
         }
 
-        public Task<T> GetAllAsync<T>(PaginationDTO paginationDTO, string token)
+        public Task<T> GetAllAsync<T>(EmployeeFilter paginationDTO, string token)
         {
             return SendAsync<T>(new APIRequest()
             {
                 ApiType = SD.ApiType.POST,
-                Url = pmsUrl + "/api/project-types/get-all",
+                Url = pmsUrl + "/api/employee/search",
                 Data = paginationDTO,
-                Token= token
+                Token = token
             });
         }
 
@@ -54,28 +53,28 @@ namespace ProjectManagement_UI.Services.GenericMasterServices
             return SendAsync<T>(new APIRequest()
             {
                 ApiType = SD.ApiType.GET,
-                Url = pmsUrl + "/api/project-types/" + id,
+                Url = pmsUrl + "/api/employee/" + id,
                 Token = token
             });
         }
 
-        public Task<T> UpdateAsync<T>(AddEditPTYViewModel dto, int statusId, string token)
+        public Task<T> UpdateAsync<T>(CreateUpdateUserRequestDTO dto, int id, string token)
         {
             return SendAsync<T>(new APIRequest()
             {
                 ApiType = SD.ApiType.PUT,
                 Data = dto,
-                Url = pmsUrl + "/api/project-types/" + statusId,
+                Url = pmsUrl + "/api/employee/" + id,
                 Token = token
             });
         }
-        public Task<T> StatusChange<T>(int id, bool status, string token)
+        public Task<T> StatusChange<T>(Guid id, string token)
         {
             return SendAsync<T>(new APIRequest()
             {
                 ApiType = SD.ApiType.POST,
                 //Data = dto,
-                Url = pmsUrl + "/api/project-types/" + id + "/" + status,
+                Url = pmsUrl + "/api/employee/" + id ,
                 Token = token
             });
 

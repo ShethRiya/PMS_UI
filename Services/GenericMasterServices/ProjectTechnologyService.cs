@@ -16,62 +16,63 @@ namespace ProjectManagement_UI.Services.GenericMasterServices
             pmsUrl = configuration.GetValue<string>("ServiceUrls:PMSAPIProject");
 
         }
-        public Task<T> GetAllAsync<T>(PaginationDTO paginationDTO)
+        public Task<T> GetAllAsync<T>(PaginationDTO paginationDTO, string token)
         {
             return SendAsync<T>(new APIRequest()
             {
                 ApiType = SD.ApiType.POST,
                 Url = pmsUrl + "/api/project-technology/get-all",
-                Data = paginationDTO
+                Data = paginationDTO,
+                Token = token
             });
         }
-        public Task<T> CreateAsync<T>(AddEditPTViewModel dto)
+        public Task<T> CreateAsync<T>(AddEditPTViewModel dto, string token)
         {
             return SendAsync<T>(new APIRequest()
             {
                 ApiType = SD.ApiType.POST,
                 Data = dto,
                 Url = pmsUrl + "/api/project-technology",
-                //Token = token
+                Token = token
             });
         }
-        public Task<T> StatusChange<T>(int id, bool status)
+        public Task<T> StatusChange<T>(int id, bool status, string token)
         {
             return SendAsync<T>(new APIRequest()
             {
                 ApiType = SD.ApiType.POST,
                 //Data = dto,
                 Url = pmsUrl + "/api/project-technology/" + id + "/" + status,
-                //Token = token
+                Token = token
             });
 
         }
-        public Task<T> GetAsync<T>(int id)
+        public Task<T> GetAsync<T>(int id, string token)
         {
             return SendAsync<T>(new APIRequest()
             {
                 ApiType = SD.ApiType.GET,
                 Url = pmsUrl + "/api/project-technology/" + id,
-                //Token = token
+                Token = token
             });
         }
-        public Task<T> UpdateAsync<T>(AddEditPTViewModel dto, int statusId)
+        public Task<T> UpdateAsync<T>(AddEditPTViewModel dto, int statusId, string token)
         {
             return SendAsync<T>(new APIRequest()
             {
                 ApiType = SD.ApiType.PUT,
                 Data = dto,
                 Url = pmsUrl + "/api/project-technology/" + statusId,
-                //Token = token
+                Token = token
             });
         }
-        public Task<T> DeleteAsync<T>(int id)
+        public Task<T> DeleteAsync<T>(int id, string token)
         {
             return SendAsync<T>(new APIRequest()
             {
                 ApiType = SD.ApiType.DELETE,
                 Url = pmsUrl + "/api/project-technology/" + id,
-                //Token = token
+                Token = token
             });
         }
 

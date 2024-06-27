@@ -1,0 +1,81 @@
+﻿@model TaskViewModel
+<partial name="_Header" />
+<partial name="Toaster" />
+
+
+<div class="shadow-lg card-body container d-flex mt-4 flex-wrap">
+    <input hidden asp-for="ProjectId" />
+    @for (int i = 1; i < Model.TaskRows.Count; i++)
+    {
+
+        <div class="card p-2 mt-4" style="width: 18rem;">
+            <div class="card-body d-flex flex-column">
+                <h5 class="card-title">@Model.TaskRows[i].TaskName</h5>
+                <h6 class="card-subtitle mb-2 text-muted">@Model.TaskRows[i].ProjectName</h6>
+                <p class="card-text">@Model.TaskRows[i].Description</p>
+                <div>@Model.TaskRows[i].StartDate.ToString("ddd, dd MMM yyyy")</div>
+                <div>End date: @Model.TaskRows[i].EndDate.ToString("ddd, dd MMM yyyy")</div>
+                <div>stat date: @Model.TaskRows[i].StartDate.ToString("ddd, dd MMM yyyy")</div>
+                
+                <div class="d-inline">Completion date: @Model.TaskRows[i].CompletedDate</div>
+                @if (Model.TaskRows[i].IsCompleted)
+                {
+                   <p>Is Completed :</p> <input type="checkbox" checked class="check" disabled />
+                }
+                else
+                {
+
+                    <p>Is Completed:</p><input type="checkbox" class="check" onchange="IsCompleted(@Model.TaskRows[i].TaskId , this)" />
+
+                }
+
+
+                @if (Model.TaskRows[i].IsActive)
+                {
+                    <input type="checkbox" checked class="check" onchange="StatusChange(@Model.TaskRows[i].TaskId, this)" />
+                }
+                else
+                {
+
+                    <input type="checkbox" class="check" onchange="StatusChange(@Model.TaskRows[i].TaskId , this)" />
+
+                }
+
+                <a asp-controller="Project" asp-action="EditTask" asp-route-taskId="@Model.TaskRows[i].TaskId" class="text-decoration-none text-light bg-info my-1 p-2 btn">Edit Task</a>
+                <a asp-controller="Project" asp-action="AssignTask" asp-route-taskId="@Model.TaskRows[i].TaskId" asp-route-name="@Model.TaskRows[i].TaskName" asp-route-ProjectId="@Model.ProjectId" class="btn bg-black text-light my-1 p-2">Assign  Task</a>
+            </div>
+        </div>
+    }
+</div>
+<script>
+    function StatusChange(id, checkbox) {
+        var isChecked = checkbox.checked;
+        $.ajax({
+            url: "/Project/StatusChangeTask",
+            data: { Id: id, Status: isChecked },
+            type: 'POST',
+            success: function (result) {
+                location.reload();
+            },
+            error: function (error) {
+                console.log(error);
+                alert('Error changing task status')
+            },
+        });
+    }
+    function IsCompleted(id, checkbox) {
+        var isChecked = checkbox.checked;
+        $.ajax({
+            url: "/Project/MarkAsCompleteTask",
+            data: { Id: id },
+            type: 'POST',
+            success: function (result) {
+                location.reload();
+            },
+            error: function (error) {
+                console.log(error);
+                alert('Error completing task')
+            },
+        });
+    }
+</script>

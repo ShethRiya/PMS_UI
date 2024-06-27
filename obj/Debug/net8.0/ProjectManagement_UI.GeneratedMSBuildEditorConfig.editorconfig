@@ -114,16 +114,32 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/pct212/Desktop/PMS_UI/ProjectManagement_UI/Views/Project/AddProject.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvamVjdFxBZGRQcm9qZWN0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/pct212/Desktop/PMS_UI/ProjectManagement_UI/Views/Project/EditProject.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvamVjdFxFZGl0UHJvamVjdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/pct212/Desktop/PMS_UI/ProjectManagement_UI/Views/Project/Project.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvamVjdFxQcm9qZWN0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pct212/Desktop/PMS_UI/ProjectManagement_UI/Views/Project/_AddProject.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvamVjdFxfQWRkUHJvamVjdC5jc2h0bWw=
+[C:/Users/pct212/Desktop/PMS_UI/ProjectManagement_UI/Views/Project/Task/AddTask.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvamVjdFxUYXNrXEFkZFRhc2suY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pct212/Desktop/PMS_UI/ProjectManagement_UI/Views/Project/_EditProject.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvamVjdFxfRWRpdFByb2plY3QuY3NodG1s
+[C:/Users/pct212/Desktop/PMS_UI/ProjectManagement_UI/Views/Project/Task/EditTask.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvamVjdFxUYXNrXEVkaXRUYXNrLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/pct212/Desktop/PMS_UI/ProjectManagement_UI/Views/Project/Task/ViewProjectTasks.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvamVjdFxUYXNrXFZpZXdQcm9qZWN0VGFza3MuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/pct212/Desktop/PMS_UI/ProjectManagement_UI/Views/Project/Task/_AssignTask.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvamVjdFxUYXNrXF9Bc3NpZ25UYXNrLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/pct212/Desktop/PMS_UI/ProjectManagement_UI/Views/Project/_ProjectPartialTable.cshtml]

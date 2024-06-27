@@ -2,17 +2,21 @@
 using ProjectManagement_UI.Models.Designation;
 using ProjectManagement_UI.Models.ProjectStatus;
 using ProjectManagement_UI.Models.ProjectTechnology;
+using ProjectManagement_UI.Models.ProjectType;
 
 namespace ProjectManagement_UI.Models.Project
 {
     public class ProjectViewModel : ProjectFilter
     {
-        public List<PTDrow> TechnologyRows { get; set; }
+        public List<PTDrow>? TechnologyRows { get; set; }
         //public List<DesignationRow> DesignationRows{ get; set; }
-        public List<PSDrow> PSDrows { get; set; }
-        public List<ProjectRow> ProjectRows { get; set; }
+        public List<PSDrow>? PSDrows { get; set; }
+        public List<ProjectRow>? ProjectRows { get; set; }
         public int? ProjectId { get; set; }
-
+        public List<PTYDrows>? PTYDrows { get; set; }
+        public int? ProjectCategoryId { get; set; }
+        public ProjectRow ProjectRow { get; set; }
+        public CreateProjectViewModel CreateProjectViewModel { get; set; }
         //for editing
         public string? Description { get; set; }
 
